@@ -10,7 +10,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.DRAWER_BASED_SCREEN;
+  static const INITIAL = Routes.DRAWER_BASED;
 
   static final routes = [
     GetPage(

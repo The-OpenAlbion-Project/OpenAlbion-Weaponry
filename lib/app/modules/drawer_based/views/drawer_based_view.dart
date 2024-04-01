@@ -8,30 +8,33 @@ import '../controllers/drawer_based_controller.dart';
 
 class DrawerBasedView extends GetView<DrawerBasedController> {
   const DrawerBasedView({super.key});
-  
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawerEnableOpenDragGesture: true,
       drawer: Drawer(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         child: Column(
           children: [
-            DrawerHeaderSection(),
-            DrawerBodyScreen(),
+            DrawerHeaderSection(controller: controller),
+            DrawerBodyScreen(controller: controller),
           ],
         ),
       ),
-      body: Consumer<HomeProvider>(builder: (context, provider, child) {
-        switch (provider.selectedCategoryType) {
-          case AppConstants.CATEGORY_TYPE_SETTING:
-            return SettingScreen(settingsController: widget.settingsController);
+      // body: Consumer<HomeProvider>(builder: (context, provider, child) {
+      //   switch (provider.selectedCategoryType) {
+      //     case AppConstants.CATEGORY_TYPE_SETTING:
+      //       return SettingScreen(settingsController: widget.settingsController);
 
-          case AppConstants.CATEGORY_TYPE_ABOUT:
-            return AboutScreen();
+      //     case AppConstants.CATEGORY_TYPE_ABOUT:
+      //       return AboutScreen();
 
-          default:
-            return HomeScreen();
-        }
-      }),
+      //     default:
+      //       return HomeScreen();
+      //   }
+      // }),
+      body: SizedBox(),
     );
   }
 }

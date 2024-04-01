@@ -100,6 +100,7 @@ class WeaponryApp extends StatelessWidget {
           darkTheme: darkThemeData(context),
           themeMode: settingsController.themeMode,
           getPages: AppPages.routes,
+          initialRoute: AppPages.INITIAL,
         );
       },
     );

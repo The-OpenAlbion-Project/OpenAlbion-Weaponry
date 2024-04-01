@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:openalbion_weaponry/app/core/based/based_controller.dart';
 import 'package:openalbion_weaponry/data/vos/app_error.dart';
+import 'package:openalbion_weaponry/data/vos/report_vo.dart';
 import 'package:openalbion_weaponry/network/firebase/firebase_analytics_repository.dart';
 import 'package:openalbion_weaponry/network/firebase/firebase_analytics_repository_impl.dart';
 import 'package:openalbion_weaponry/network/repository/network_repository.dart';
@@ -8,7 +9,7 @@ import 'package:openalbion_weaponry/network/repository/network_repository_impl.d
 import 'package:openalbion_weaponry/persistent/shared_preference.dart';
 import 'package:shake/shake.dart';
 
-class AppStartService extends BasedController{
+class AppStartService extends BasedController {
   AppError? appError;
   final NetworkRepository _repository = NetworkRepositoryImpl();
   final FirebaseAnalyticsRepository _fireRepository = FirebaseAnalyticsRepositoryImpl();
@@ -21,7 +22,7 @@ class AppStartService extends BasedController{
 
   late ShakeDetector _detector;
 
-    // bug report
+  // bug report
   void initializeShaker() {
     _bugCategoryList = ["Item Missing", "Item Wrong Info", "Other"];
     _detector = ShakeDetector.autoStart(
@@ -49,15 +50,14 @@ class AppStartService extends BasedController{
   }
 
   void reportBug({required ReportVO report}) async {
-    if (await handleConnectionView(isReplaceView: false)) {
-      return;
-    }
-    Either<AppError, String> data = await _repository.reportBug(report: report);
-    data.fold((L) {
-      appError = L;
-    }, (R) {
-      setNotifyMessage("Thanks For Your Report.");
-    });
+    callDataService(
+      repository.reportBug(report: report),
+      onSuccess: (response) {
+        toast("Thanks For Your Report.");
+      },
+      onError: (error) {
+        
+      },
+    );
   }
-
 }

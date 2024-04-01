@@ -3,14 +3,12 @@ part of 'app_pages.dart';
 
 abstract class Routes {
   Routes._();
-  static const DRAWER_BASED_SCREEN = _Paths.DRAWER_BASED_SCREEN;
   static const DRAWER_BASED = _Paths.DRAWER_BASED;
   static const ABOUT = _Paths.ABOUT;
 }
 
 abstract class _Paths {
   _Paths._();
-  static const DRAWER_BASED_SCREEN = '/drawer-based-screen';
   static const DRAWER_BASED = '/drawer-based';
   static const ABOUT = '/about';
 }

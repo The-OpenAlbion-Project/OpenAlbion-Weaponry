@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:openalbion_weaponry/app/weaponry_app.dart';
 import 'package:openalbion_weaponry/data/vos/search_result_vo.dart';
 import 'package:openalbion_weaponry/firebase_options.dart';
 import 'package:openalbion_weaponry/persistent/hive_constants.dart';
@@ -16,14 +17,15 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final settingsController = SettingsController(SettingsService());
   settingsController.loadSettings();
-
+  Get.put(FirebaseNotificationService());
   _initializeOrientation();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await _initializeHive();
   await _initializeEnv();
   await _initializeCloudMessagingService();
 
-  runApp(MyApp(settingsController: settingsController));
+  // runApp(MyApp(settingsController: settingsController));
+  runApp(WeaponryApp(settingsController: settingsController));
 }
 
 Future<void> _initializeEnv() async {

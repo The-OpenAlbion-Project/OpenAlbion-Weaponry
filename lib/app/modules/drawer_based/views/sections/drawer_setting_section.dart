@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:openalbion_weaponry/app/modules/drawer_based/controllers/drawer_based_controller.dart';
 import 'package:openalbion_weaponry/constants/app_constants.dart';
+import 'package:openalbion_weaponry/constants/app_enums.dart';
 import 'package:openalbion_weaponry/features/global/inter_text.dart';
 import 'package:openalbion_weaponry/providers/home_provider.dart';
 import 'package:openalbion_weaponry/theme/app_color.dart';
@@ -8,24 +11,24 @@ import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DrawerSettingSection extends StatelessWidget {
-  const DrawerSettingSection({super.key});
+  final DrawerBasedController controller;
+  const DrawerSettingSection({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<HomeProvider>(builder: (context, provider, child) {
+    return Obx(() {
       return Column(
         children: [
           ListTile(
-            selected: provider.selectedCategoryType == AppConstants.CATEGORY_TYPE_SETTING,
-            title: InterText(
-                AppLocalizations.of(context)!.setting,
+            selected: controller.drawerContent == DrawerContent.setting,
+            title: InterText(AppLocalizations.of(context)!.setting,
                 style: TextStyle(
-                    color: provider.selectedCategoryType == AppConstants.CATEGORY_TYPE_SETTING
+                    color: controller.drawerContent == DrawerContent.setting
                         ? secondaryRed
                         : get80PercentColor(context))),
             onTap: () {
-              provider.selectCategoryType(AppConstants.CATEGORY_TYPE_SETTING);
-              Navigator.pop(context);
+              // provider.selectCategoryType(AppConstants.CATEGORY_TYPE_SETTING);
+              // Navigator.pop(context);
             },
           )
         ],

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:openalbion_weaponry/app/modules/drawer_based/controllers/drawer_based_controller.dart';
 import 'package:openalbion_weaponry/constants/app_dimens.dart';
 import 'package:openalbion_weaponry/features/global/inter_text.dart';
 import 'package:openalbion_weaponry/providers/home_provider.dart';
@@ -9,13 +11,12 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DrawerHeaderSection extends StatelessWidget {
-  const DrawerHeaderSection({
-    super.key,
-  });
+  final DrawerBasedController controller;
+  const DrawerHeaderSection({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
-    // final homeProvider = Provider.of<HomeProvider>(context);
+    DrawerBasedController testController = Get.find();
 
     return DrawerHeader(
       margin: EdgeInsets.zero,
@@ -45,9 +46,9 @@ class DrawerHeaderSection extends StatelessWidget {
           ),
           Align(
             alignment: Alignment.bottomLeft,
-            child: Consumer<HomeProvider>(builder: (context, provider, child) {
+            child: Obx(() {
               return InterText(
-                'Version ${provider.versionName}',
+                'Version ${controller.versionName}',
                 style: TextStyle(fontSize: TEXT_SMALL, fontWeight: FontWeight.w500, color: whiteText),
               );
             }),

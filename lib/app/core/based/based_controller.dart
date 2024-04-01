@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:openalbion_weaponry/app/core/based/based_response.dart';
 import 'package:openalbion_weaponry/app/core/states/page_state.dart';
 import 'package:openalbion_weaponry/app/core/states/snack_bar_state.dart';
+import 'package:openalbion_weaponry/data/vos/app_error.dart';
 import 'package:openalbion_weaponry/network/firebase/firebase_analytics_repository.dart';
 import 'package:openalbion_weaponry/network/firebase/firebase_analytics_repository_impl.dart';
 import 'package:openalbion_weaponry/network/repository/network_repository_v2.dart';
@@ -11,7 +12,7 @@ import 'package:openalbion_weaponry/network/repository/network_repository_v2_imp
 import 'package:openalbion_weaponry/persistent/shared_preference.dart';
 
 class BasedController extends GetxController {
-  final NetworkRepositoryV2 _repository = NetworkRepositoryV2Impl();
+  final NetworkRepositoryV2 repository = NetworkRepositoryV2Impl();
   final FirebaseAnalyticsRepository _fireRepository = FirebaseAnalyticsRepositoryImpl();
   final SharedPreference _preference = SharedPreference();
 
@@ -40,7 +41,7 @@ class BasedController extends GetxController {
 
   dynamic callDataService<T>(
     Future<BasedResponse<T>> future, {
-    Function(String errorMessage)? onError,
+    Function(AppError error)? onError,
     Function(T response)? onSuccess,
     Function? onStart,
     Function? onComplete,
@@ -74,7 +75,7 @@ class BasedController extends GetxController {
         break;
       case ResponseError<T>():
         if (onError != null) {
-          onError(response.message.toString());
+          onError(AppError(code: response.code ?? '-', message: response.message ?? 'Unknown Error In Api Response'));
         }
         break;
     }
