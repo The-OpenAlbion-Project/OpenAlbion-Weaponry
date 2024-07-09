@@ -36,6 +36,9 @@ class ConsumableCraftingSection extends StatelessWidget {
 
         case ViewState.ERROR:
           return _buildCraftingError(provider.appError!);
+        case ViewState.NONE:
+        case ViewState.NO_INTERNET:
+          return SizedBox();
       }
       return _buildCompleteUI(context);
     });
