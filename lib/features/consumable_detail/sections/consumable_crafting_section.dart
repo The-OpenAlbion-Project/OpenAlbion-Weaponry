@@ -87,8 +87,8 @@ class IngredientSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<CraftingProvider>(builder: (context, craftingProvider, child) {
       return Consumer<ConsumableDetailProvider>(builder: (context, detailProvider, child) {
-        var enchantment = craftingProvider.getCraftingEnchantment(
-            enchantmentId: detailProvider.selectedEnchantment.enchantment);
+        var enchantment =
+            craftingProvider.getCraftingEnchantment(enchantmentId: detailProvider.selectedEnchantment.enchantment);
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -103,8 +103,7 @@ class IngredientSection extends StatelessWidget {
                 itemCount: enchantment?.crafting.requirements.length ?? 0,
                 itemBuilder: (context, index) {
                   return enchantment != null
-                      ? IngredientItemView(
-                          craftingRequirementVO: enchantment.crafting.requirements[index])
+                      ? IngredientItemView(craftingRequirementVO: enchantment.crafting.requirements[index])
                       : SizedBox();
                 })
           ],
@@ -128,19 +127,20 @@ class IngredientItemView extends StatelessWidget {
         padding: const EdgeInsets.only(bottom: MARGIN_MEDIUM_2),
         child: GestureDetector(
           onTap: () {
-            DialogUtils.showAlredyHaveDialog(
-                context: context,
-                onUpdate: (amount) {
-                  craftingProvider.alreadyHaveMap[craftingRequirementVO.identifier] = amount;
-                  craftingProvider.notifyListeners();
-                });
+            // TODO: dialog replacement
+
+            // DialogUtils.showAlredyHaveDialog(
+            //     context: context,
+            //     onUpdate: (amount) {
+            //       craftingProvider.alreadyHaveMap[craftingRequirementVO.identifier] = amount;
+            //       craftingProvider.notifyListeners();
+            //     });
           },
           child: Container(
             width: double.infinity,
             margin: EdgeInsets.symmetric(horizontal: MARGIN_MEDIUM_2),
             decoration: BoxDecoration(
-                color: getCardColor(context).withOpacity(0.5),
-                borderRadius: BorderRadius.circular(MARGIN_MEDIUM)),
+                color: getCardColor(context).withOpacity(0.5), borderRadius: BorderRadius.circular(MARGIN_MEDIUM)),
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               SizedBox(height: MARGIN_MEDIUM_2),
               Row(
@@ -158,8 +158,7 @@ class IngredientItemView extends StatelessWidget {
                     children: [
                       InterText(craftingRequirementVO.name),
                       SizedBox(height: MARGIN_MEDIUM),
-                      InterText(
-                          "x ${craftingRequirementVO.value * craftingProvider.selectedCraftAmount}")
+                      InterText("x ${craftingRequirementVO.value * craftingProvider.selectedCraftAmount}")
                     ],
                   ),
                 ],
@@ -170,8 +169,7 @@ class IngredientItemView extends StatelessWidget {
                 child: Row(
                   children: [
                     SizedBox(width: 120, child: InterText("Already Have")),
-                    InterText(
-                        "-   ${craftingProvider.getAlreadyHaveAmount(craftingRequirementVO.identifier)}")
+                    InterText("-   ${craftingProvider.getAlreadyHaveAmount(craftingRequirementVO.identifier)}")
                   ],
                 ),
               ),
@@ -215,23 +213,20 @@ class ProductSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<CraftingProvider>(builder: (context, craftProvider, child) {
       return Consumer<ConsumableDetailProvider>(builder: (context, detailProvider, child) {
-        var enchantment = craftProvider.getCraftingEnchantment(
-            enchantmentId: detailProvider.selectedEnchantment.enchantment);
+        var enchantment =
+            craftProvider.getCraftingEnchantment(enchantmentId: detailProvider.selectedEnchantment.enchantment);
         return Container(
           width: double.infinity,
           margin: EdgeInsets.symmetric(horizontal: MARGIN_MEDIUM_2),
           decoration: BoxDecoration(
-              color: getCardColor(context).withOpacity(0.5),
-              borderRadius: BorderRadius.circular(MARGIN_MEDIUM)),
+              color: getCardColor(context).withOpacity(0.5), borderRadius: BorderRadius.circular(MARGIN_MEDIUM)),
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             SizedBox(height: MARGIN_MEDIUM_2),
             Row(
               children: [
                 SizedBox(width: MARGIN_MEDIUM_2),
                 CachedNetworkImage(
-                  imageUrl: detailProvider.enchanmentList.isEmpty
-                      ? item.icon
-                      : detailProvider.selectedEnchantment.icon,
+                  imageUrl: detailProvider.enchanmentList.isEmpty ? item.icon : detailProvider.selectedEnchantment.icon,
                   width: 75,
                   filterQuality: FilterQuality.high,
                 ),
@@ -243,8 +238,7 @@ class ProductSection extends StatelessWidget {
                     InterText(item.name),
                     SizedBox(height: MARGIN_MEDIUM),
                     enchantment != null
-                        ? InterText(
-                            "x ${craftProvider.selectedCraftAmount * enchantment.crafting.perCraft}")
+                        ? InterText("x ${craftProvider.selectedCraftAmount * enchantment.crafting.perCraft}")
                         : SizedBox()
                   ],
                 ),
@@ -327,17 +321,15 @@ class CityDropDownSection extends StatelessWidget {
             //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
             isDense: true,
             contentPadding: EdgeInsets.zero,
-            border:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(4), borderSide: BorderSide.none),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(4), borderSide: BorderSide.none),
             //Add more decoration as you want here
             //Add label If you want but add hint outside the decoration to be aligned in the button perfectly.
           ),
-          buttonStyleData:
-              const ButtonStyleData(height: 30, padding: EdgeInsets.only(right: MARGIN_MEDIUM)),
+          buttonStyleData: const ButtonStyleData(height: 30, padding: EdgeInsets.only(right: MARGIN_MEDIUM)),
           dropdownStyleData: DropdownStyleData(
             offset: Offset(0, -10),
-            decoration: BoxDecoration(
-                color: getCardColor(context), borderRadius: BorderRadius.circular(4), boxShadow: []),
+            decoration:
+                BoxDecoration(color: getCardColor(context), borderRadius: BorderRadius.circular(4), boxShadow: []),
           ),
           onChanged: (city) {
             if (city != null) {
@@ -376,8 +368,7 @@ class SimpleButton extends StatelessWidget {
       child: Container(
         height: 30,
         padding: EdgeInsets.symmetric(horizontal: MARGIN_MEDIUM_3),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(MARGIN_MEDIUM), color: getCardColor(context)
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(MARGIN_MEDIUM), color: getCardColor(context)
             // border: Border.all(
             //   color: get60PercentColor(context),
             // ),

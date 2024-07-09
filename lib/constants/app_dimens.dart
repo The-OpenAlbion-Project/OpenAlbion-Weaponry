@@ -29,4 +29,4 @@ const double HEIGHT_MANGA_ROW = 300;
 const double HEIGHT_MANGA = 200;
 const double WIDTH_MANGA = 160;
 
-const double HEIGHT_SUB_CATEGORY = 28;
+const double HEIGHT_SUB_CATEGORY = 34;

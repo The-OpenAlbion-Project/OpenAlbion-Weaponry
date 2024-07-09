@@ -2,7 +2,6 @@
 
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_custom_dialog/flutter_custom_dialog.dart';
 import 'package:openalbion_weaponry/data/vos/app_error.dart';
 import 'package:openalbion_weaponry/data/vos/report_vo.dart';
 import 'package:openalbion_weaponry/data/vos/version_result_vo.dart';
@@ -12,10 +11,8 @@ import 'package:openalbion_weaponry/network/repository/network_repository.dart';
 import 'package:openalbion_weaponry/network/repository/network_repository_impl.dart';
 import 'package:openalbion_weaponry/persistent/shared_preference.dart';
 import 'package:openalbion_weaponry/providers/based_provider.dart';
-import 'package:openalbion_weaponry/utils/dialog_utils.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shake/shake.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class AppStartProvider extends BasedProvider {
   AppError? appError;
@@ -39,15 +36,17 @@ class AppStartProvider extends BasedProvider {
           var shakeEnabled = await _preference.getShakeToReport();
           if (shakeEnabled && !isShaking) {
             isShaking = true;
-            DialogUtils.showDebugReport(
-                context: context,
-                titleList: _bugCategoryList,
-                onDimissied: () {
-                  isShaking = false;
-                },
-                onSubmited: (report) {
-                  reportBug(report: report);
-                });
+            // TODO: dialog replacement
+
+            // DialogUtils.showDebugReport(
+            //     context: context,
+            //     titleList: _bugCategoryList,
+            //     onDimissied: () {
+            //       isShaking = false;
+            //     },
+            //     onSubmited: (report) {
+            //       reportBug(report: report);
+            //     });
           }
         });
   }
@@ -85,14 +84,14 @@ class AppStartProvider extends BasedProvider {
       String latestVersion = R.version;
       int latestVersionExtended = getExtendedVersionNumber(latestVersion);
       if (currentVersionExtanded < latestVersionExtended) {
-        DialogUtils.showVersionUpdateDialog(
-            context: context,
-            versionResult: R,
-            onUpdate: () async {
-              await launchUrl(
-                  Uri.parse("https://play.google.com/store/apps/details?id=com.openalbion.weaponry"),
-                  mode: LaunchMode.externalApplication);
-            });
+        // TODO: dialog replacement
+        // DialogUtils.showVersionUpdateDialog(
+        //     context: context,
+        //     versionResult: R,
+        //     onUpdate: () async {
+        //       await launchUrl(Uri.parse("https://play.google.com/store/apps/details?id=com.openalbion.weaponry"),
+        //           mode: LaunchMode.externalApplication);
+        //     });
       }
     });
   }

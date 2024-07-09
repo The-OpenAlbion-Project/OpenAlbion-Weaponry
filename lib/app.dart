@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_custom_dialog/flutter_custom_dialog.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:openalbion_weaponry/providers/app_start_provider.dart';
 import 'package:openalbion_weaponry/routes.dart';
 import 'package:openalbion_weaponry/theme/app_theme.dart';
-import 'package:openalbion_weaponry/utils/dialog_utils.dart';
 import 'package:provider/provider.dart';
-import 'package:shake/shake.dart';
 
 import 'src/settings/settings_controller.dart';
 
