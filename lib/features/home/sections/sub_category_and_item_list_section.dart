@@ -15,25 +15,25 @@ class SubCategoryAndItemListSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: CustomScrollView(
-        physics: BouncingScrollPhysics(),
-        slivers: [
-          SliverPersistentHeader(
-            delegate: SubCategoryPersistentHeaderDelegate(),
-            pinned: true,
-          ),
-          ItemListSection(onTap: (type, item) {
-            navigateDetailScreen(context, type, item);
-          })
-        ],
-        // children: [
-        //   SizedBox(height: MARGIN_MEDIUM_2),
-        //   SubCategoryListSection(),
-        //   SizedBox(height: MARGIN_MEDIUM_2),
+      child: Column(
+        // physics: BouncingScrollPhysics(),
+        // slivers: [
+        //   SliverPersistentHeader(
+        //     delegate: SubCategoryPersistentHeaderDelegate(),
+        //     pinned: true,
+        //   ),
         //   ItemListSection(onTap: (type, item) {
         //     navigateDetailScreen(context, type, item);
         //   })
         // ],
+        children: [
+          SizedBox(height: MARGIN_MEDIUM_2),
+          SubCategoryListSection(),
+          SizedBox(height: MARGIN_MEDIUM_2),
+          ItemListSection(onTap: (type, item) {
+            navigateDetailScreen(context, type, item);
+          })
+        ],
       ),
     );
   }
