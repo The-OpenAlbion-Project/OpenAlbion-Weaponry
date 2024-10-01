@@ -3,7 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+// import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:openalbion_weaponry/data/vos/search_result_vo.dart';
 import 'package:openalbion_weaponry/firebase_options.dart';
@@ -35,36 +35,36 @@ void _handleFirebaseCloudMessaging() {
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     print('Got a message whilst in the foreground!');
     print('Message data: ${message.data}');
-    _showLocalNotification(message.data['title'], message.data['message']);
+    // _showLocalNotification(message.data['title'], message.data['message']);
     if (message.notification != null) {
       print('Message also contained a notification: ${message.notification}');
     }
   });
 }
 
-void _showLocalNotification(String title, String message) async {
-  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-  // request permission
-  flutterLocalNotificationsPlugin
-      .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
-      ?.requestPermission();
-// initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
-  const AndroidInitializationSettings initializationSettingsAndroid =
-      AndroidInitializationSettings('app_icon');
+// void _showLocalNotification(String title, String message) async {
+//   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+//   // request permission
+//   flutterLocalNotificationsPlugin
+//       .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+//       ?.requestNotificationsPermission();
+// // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
+//   const AndroidInitializationSettings initializationSettingsAndroid =
+//       AndroidInitializationSettings('app_icon');
 
-  const AndroidNotificationDetails androidNotificationDetails = AndroidNotificationDetails(
-    '100',
-    'open_albion_channel',
-    channelDescription: 'Notification channel for OpenAlbion Weaponry application',
-    importance: Importance.max,
-    priority: Priority.high,
-    ticker: 'ticker',
-    icon: "app_icon",
-  );
-  const NotificationDetails notificationDetails =
-      NotificationDetails(android: androidNotificationDetails);
-  await flutterLocalNotificationsPlugin.show(10, title, message, notificationDetails, payload: 'item x');
-}
+//   const AndroidNotificationDetails androidNotificationDetails = AndroidNotificationDetails(
+//     '100',
+//     'open_albion_channel',
+//     channelDescription: 'Notification channel for OpenAlbion Weaponry application',
+//     importance: Importance.max,
+//     priority: Priority.high,
+//     ticker: 'ticker',
+//     icon: "app_icon",
+//   );
+//   const NotificationDetails notificationDetails =
+//       NotificationDetails(android: androidNotificationDetails);
+//   await flutterLocalNotificationsPlugin.show(10, title, message, notificationDetails, payload: 'item x');
+// }
 
 Future<void> _initializeEnv() async {
   await dotenv.load(fileName: ".env");
